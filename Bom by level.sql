@@ -28,8 +28,16 @@ WITH BOMCTE AS (
 	,I.[Production BOM No.]
 	,BOM.[Version Code]
 	,BOM.[No.] AS [Component]
-	,BOM.[Version starting date] AS [Start date]
-	,BOM.[Version ending date] AS [End date]
+	,CASE
+	    WHEN BOMCTE.[Start date] > BOM.[Version starting date]
+		THEN BOMCTE.[Start date]
+		ELSE BOM.[Version starting date]
+	END AS [Start date]
+	,CASE
+	    WHEN BOMCTE.[End date] < BOM.[Version ending date]
+		THEN BOMCTE.[End date]
+		ELSE BOM.[Version ending date]
+	END AS [End date]
 	,BOM.[Quantity per]
 	,BOM.[Scrap %] AS [Scrap pct]
 	,BOM.[Quantity per] * (1 + BOM.[Scrap %] / 100) AS [Component qty per incl scrap]
