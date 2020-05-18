@@ -1,14 +1,19 @@
-USE [BKI_IMP_EXP]
-
+SET ANSI_NULLS ON
 GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Nicholaj Olsen
+-- Create date: 2020-05-18
+-- Description:	Traces a contract no. and delivery name from load_roaster until packing machines (included)
+-- =============================================
+CREATE PROCEDURE 'Trace LOAD_R to packing' 
+	@CONTRACT VARCHAR(20)
+	,@DELIVERY VARCHAR(20)
+AS
+BEGIN
+	SET NOCOUNT ON;
 
-DECLARE @CONTRACT VARCHAR(20)
-DECLARE @DELIVERY VARCHAR(20)
-
-SET @CONTRACT = '13-376'
-SET @DELIVERY = '1'
-
-;
 
 WITH [CTE_TRACE] AS (
 SELECT DISTINCT
@@ -156,3 +161,7 @@ GROUP BY
 	,[PG].[CUSTOMER_CODE]
 	,[PG].[DESTINATION]
 	,[PG].[ORDER_NAME]
+
+
+END
+GO
