@@ -7,7 +7,7 @@ GO
 -- Create date: 2020-05-18
 -- Description:	Traces a contract no. and delivery name from load_roaster until packing machines (included)
 -- =============================================
-CREATE PROCEDURE 'Trace LOAD_R to packing' 
+CREATE PROCEDURE [Trace LOAD_R to packing]
 	@CONTRACT VARCHAR(20)
 	,@DELIVERY VARCHAR(20)
 AS
